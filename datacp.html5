@@ -82,27 +82,33 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $servername = "47.74.176.6";
-                                            $username = "root";
-                                            $password = "foobar123!";
-                                            $con=mysqli_connect($servername,$username,$password,"GodsEye");
-                                            if (!empty($_POST['query'])) {
+                                            <tr>
+                                                <?php
+                                                $servername = "47.74.176.6";
+                                                $username = "root";
+                                                $password = "foobar123!";
+                                                $con=mysqli_connect($servername,$username,$password,"GodsEye");
+                                                if (!empty($_POST['query'])) {
 
-                                                $term = mysqli_real_escape_string($con,$_POST['query']);
-                                                $sql = "SELECT `name`, `address`, `rating`, `lat`, `lng` FROM location WHERE name LIKE '%" . $_POST['query'] . "%'";
-                                                $r_query = mysqli_query($con,$sql);
+                                                    $term = mysqli_real_escape_string($con,$_POST['query']);
+                                                    //$sql = "SELECT `id`, `name`, `address`, `rating`, `lat`, `lng` FROM location WHERE name LIKE '%" . $_POST['query'] . "%'";
+                                                    $sql = "SELECT `id`, `name`, `address`, `rating`, `lat`, `lng` FROM location WHERE name LIKE '" . $_POST['query'] . "'";
+                                                    $r_query = mysqli_query($con,$sql);
 
-                                                while ($row = mysqli_fetch_array($r_query)) {
-                                                    echo 'Name: ' . $row['name'];
-                                                    echo '<br /> address: ' . $row['address'];
-                                                    echo '<br /> rating: ' . $row['rating'];
-                                                    echo '<br /> lat: ' . $row['lat'];
-                                                    echo '<br /> long: ' . $row['lng'];
+                                                    while ($row = mysqli_fetch_array($r_query)) {
+                                                        echo 'ID: ' .$row['id'];
+                                                        echo '<br /> Name: ' . $row['name'];
+                                                        echo '<br /> Address: ' . $row['address'];
+                                                        echo '<br /> Rating: ' . $row['rating'];
+                                                        echo '<br /> Lat: ' . $row['lat'];
+                                                        echo '<br /> Long: ' . $row['lng'];
+                                                // <!-- TODO Editable fields for data here -->
+                                                    }
                                                 }
-                                            }
-                                             ?>
-
+                                                ?>
+                                                    <br/><button type="submit" class="submitButton submitButton--1" >Edit data</button>
+                                                <input type="button" value="Clear" onClick="window.location.href=window.location.href">
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
