@@ -8,9 +8,9 @@ $mysqli = new mysqli("47.74.176.6", "root", "foobar123!", "GodsEye");
  */
 
 $mysqli = new mysqli("47.74.176.6", "root", "foobar123!", "GodsEye");
-$sql = "SELECT location.id, location.name FROM location 
-			WHERE location.name LIKE '%".$_GET['query']."%'
-			LIMIT 10";
+$sql = "SELECT location.name FROM location 
+			WHERE location.name LIKE '".$_GET['query']."%'
+			LIMIT 7";
 $result = $mysqli->query($sql);
 
 $json = [];
