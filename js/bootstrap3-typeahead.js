@@ -156,11 +156,11 @@
       } else {
         element = this.$menu.insertAfter(this.$element);
         this.hasSameParent = true;
-      }      
-      
+      }
+
       if (!this.hasSameParent) {
           // We cannot rely on the element position, need to position relative to the window
-          element.css("position", "fixed");
+          element.css("position", "relative");
           var offset = this.$element.offset();
           pos.top =  offset.top;
           pos.left = offset.left;
@@ -179,7 +179,7 @@
       if (this.options.fitToElement === true) {
           element.css("width", this.$element.outerWidth() + "px");
       }
-    
+
       this.shown = true;
       return this;
     },
@@ -204,7 +204,7 @@
 
       var worker = $.proxy(function () {
 
-        // Bloodhound (since 0.11) needs three arguments. 
+        // Bloodhound (since 0.11) needs three arguments.
         // Two of them are callback functions (sync and async) for local and remote data processing
         // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
         if ($.isFunction(this.source) && this.source.length === 3) {
@@ -540,7 +540,7 @@
         this.keyPressed = false;
         if (this.options.showHintOnFocus && this.skipShowHintOnFocus !== true) {
           if(this.options.showHintOnFocus === "all") {
-            this.lookup(""); 
+            this.lookup("");
           } else {
             this.lookup();
           }
@@ -563,7 +563,7 @@
         this.skipShowHintOnFocus = true;
         this.$element.focus();
         this.mouseddown = false;
-      } 
+      }
     },
 
     click: function (e) {
