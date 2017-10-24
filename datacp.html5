@@ -101,8 +101,8 @@
                                                 <input id="name" class="form-control text-center" type="text"
                                                        value="<?php echo $name; ?>"/>
                                                 <label for="add">Address:</label>
-                                                <input id="add" class="form-control text-center" type="text"
-                                                       value="<?php echo $add; ?>"/>
+                                                <textarea id="add" class="form-control text-center" type="comment" rows="5"
+                                                       value="<?php echo $add; ?>"/><?php echo $add; ?></textarea>
                                                 <label for="rating">Rating:</label>
                                                 <input id="rating" class="form-control text-center" type="text"
                                                        value="<?php echo $rating; ?>"/>
