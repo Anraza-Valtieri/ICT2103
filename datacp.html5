@@ -64,6 +64,18 @@
                     $password = "foobar123!";
                     $con=mysqli_connect($servername,$username,$password,"GodsEye");
                     if (!empty($_POST['query'])) {
+                        $term = mysqli_real_escape_string($con, $_POST['query']);
+                        $sql = "SELECT `id`,`name`, `address`, `rating`, `lat`, `lng` FROM location WHERE name LIKE '" . $_POST['query'] . "'";
+                        $r_query = mysqli_query($con, $sql);
+                        if(mysqli_num_rows($r_query) > 0){
+                    while ($row = mysqli_fetch_array($r_query)) {
+                        $id = $row['id'];
+                        $name = $row['name'];
+                        $add = $row['address'];
+                        $rating = $row['rating'];
+                        $lat = $row['lat'];
+                        $long = $row['lng'];
+                    }
                     ?>
                     <div class="page-header">
                         <h3>
@@ -80,20 +92,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <?php
-                                    $term = mysqli_real_escape_string($con, $_POST['query']);
-                                    $sql = "SELECT `id`,`name`, `address`, `rating`, `lat`, `lng` FROM location WHERE name LIKE '" . $_POST['query'] . "'";
-                                    $r_query = mysqli_query($con, $sql);
 
-                                    while ($row = mysqli_fetch_array($r_query)) {
-                                        $id = $row['id'];
-                                        $name = $row['name'];
-                                        $add = $row['address'];
-                                        $rating = $row['rating'];
-                                        $lat = $row['lat'];
-                                        $long = $row['lng'];
-                                    }
-                                    ?>
                                     <table class="table table-striped table-bordered">
                                         <tbody>
                                         <form>
@@ -130,12 +129,14 @@
                                                 <span class="help-block grey">Space separated values.</span>
 
                                             </div>
-                                                <div class="btn-group btn-group-lg">
-                                                    <button type="submit" class="btn btn-default">Submit Edits</button>
-                                                    <input type="button" class="btn btn-default" value="Clear" onClick="window.location.href=window.location.href">
-                                                </div>
+                                            <div class="btn-group btn-group-lg">
+                                                <button type="submit" class="btn btn-default">Submit Edits</button>
+                                                <input type="button" class="btn btn-default" value="Clear"
+                                                       onClick="window.location.href=window.location.href">
+                                            </div>
                                         </form>
                                         <?php
+                                        } else {}
                                         }
                                         ?>
                                         </tbody>
