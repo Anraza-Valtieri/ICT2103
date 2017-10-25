@@ -12,7 +12,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/dataedit.css">
     <link rel='stylesheet' href="css/sideNav.css" type = 'text/css'/>
     <link rel='stylesheet' href="css/table.css" type = 'text/css'/>
 </head>
