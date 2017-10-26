@@ -64,6 +64,9 @@
             <div class="inner cover">
                 <h1 class="cover-heading">Data Control</h1>
                 <p class="lead">
+                  <?php
+                  if (empty($_POST['query'])) {
+                  ?>
                 <h3>Search Data</h3>
                 </p>
                     <form class="form-group" action="" method="post" data-toggle="validator" role="form">
@@ -86,6 +89,9 @@
                 </script>
                 </p>
             </div>
+            <?php
+            }
+            ?>
 
             <div class="container">
                 <div class="col-md-12">
@@ -102,7 +108,7 @@
                     }
                     if (!empty($_POST['query'])) {
                         $term = mysqli_real_escape_string($con, $_POST['query']);
-                        $sql = "SELECT `id`,`name`, `address`, `rating`, `lat`, `lng` FROM location WHERE name LIKE '" . $_POST['query'] . "'";
+                        $sql = "SELECT `id`,`name`, `address`, `rating`, `lat`, `lng` FROM location WHERE name = '" . $term . "'";
                         $r_query = mysqli_query($con, $sql);
                         if(mysqli_num_rows($r_query) > 0){
                     while ($row = mysqli_fetch_array($r_query)) {
@@ -163,7 +169,7 @@
                                                 <label for="ltype">Location type:</label>
                                                 <input id="ltype" class="form-control text-center" type="text"
                                                        value="<?php echo $locationtypes; ?>"/>
-                                                <span class="help-block grey">Space separated values.</span>
+                                                <span class="help-block grey small">Space separated values.</span>
 
                                             </div>
                                             <div class="btn-group btn-group-lg">
