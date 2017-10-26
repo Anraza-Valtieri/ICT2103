@@ -140,12 +140,16 @@
                                         <tbody>
                                         <form>
                                             <div class="form-group">
+                                                <label for="id">ID:</label>
+                                                <input id="id" class="form-control text-center" type="text" readonly
+                                                       value="<?php echo $id; ?>"/>
                                                 <label for="name">Name:</label>
                                                 <input id="name" class="form-control text-center" type="text"
                                                        value="<?php echo $name; ?>"/>
                                                 <label for="add">Address:</label>
-                                                <textarea id="add" class="form-control text-center" type="comment" rows="3"
-                                                       value="<?php echo $add; ?>"/><?php echo $add; ?></textarea>
+                                                <textarea id="add" class="form-control text-center" type="comment"
+                                                          rows="3"
+                                                          value="<?php echo $add; ?>"/><?php echo $add; ?></textarea>
                                                 <label for="rating">Rating:</label>
                                                 <input id="rating" class="form-control text-center" type="text"
                                                        value="<?php echo $rating; ?>"/>
@@ -177,6 +181,9 @@
                                                 <input type="button" class="btn btn-default" value="Clear"
                                                        onClick="window.location.href=window.location.href">
                                             </div>
+                                        <!-- https://canvasjs.com/javascript-charts/interactive-draggable-chart/
+                                        SELECT `hour`, `popularity` FROM time_popularity  WHERE `id` = "ChIJ936qCdk82jERSfwzW4_7V7A" AND `day` = '1' ORDER BY `hour`;
+                                        -->
                                         </form>
                                         <?php
                                         } else {}
