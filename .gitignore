@@ -15,3 +15,5 @@ js/Icon
 \._Icon
 
 \._\.gitignore
+
+\.DS_Store
