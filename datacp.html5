@@ -10,7 +10,7 @@
 
     <!-- Bootstrap core CSS -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/dataedit.css">
     <link rel='stylesheet' href="css/sideNav.css" type = 'text/css'/>
@@ -23,6 +23,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+
 
 <body>
 <div class="header" id="header">
@@ -141,26 +142,26 @@
 
                                     <table class="table table-striped table-bordered">
                                         <tbody>
-                                        <form>
+                                        <form id="allform" onsubmit="return readform()">
                                             <div class="form-group">
                                                 <label for="id">ID:</label>
-                                                <input id="id" class="form-control text-center" type="text" readonly
+                                                <input id="id" name="id" class="form-control text-center" type="text" readonly
                                                        value="<?php echo $id; ?>"/>
                                                 <label for="name">Name:</label>
-                                                <input id="name" class="form-control text-center" type="text"
+                                                <input id="name" name="name" class="form-control text-center" type="text"
                                                        value="<?php echo $name; ?>"/>
                                                 <label for="add">Address:</label>
-                                                <textarea id="add" class="form-control text-center" type="comment"
+                                                <textarea id="add" name="add" class="form-control text-center" type="comment"
                                                           rows="3"
                                                           value="<?php echo $add; ?>"/><?php echo $add; ?></textarea>
                                                 <label for="rating">Rating:</label>
-                                                <input id="rating" class="form-control text-center" type="text"
+                                                <input id="rating" name="rating" class="form-control text-center" type="text"
                                                        value="<?php echo $rating; ?>"/>
                                                 <label for="lat">Lat:</label>
-                                                <input id="lat" class="form-control text-center" type="text"
+                                                <input id="lat" name="lat" class="form-control text-center" type="text"
                                                        value="<?php echo $lat; ?>"/>
-                                                <label for="long">Long:</label>
-                                                <input id="long" class="form-control text-center" type="text"
+                                                <label for="lng">Long:</label>
+                                                <input id="lng" name="lng" class="form-control text-center" type="text"
                                                        value="<?php echo $long; ?>"/>
 
                                                 <?php
@@ -174,20 +175,140 @@
 
                                                 ?>
                                                 <label for="ltype">Location type:</label>
-                                                <input id="ltype" class="form-control text-center" type="text"
+                                                <input id="ltype" name="ltype" class="dbsearch form-control text-center" type="text" data-provide="typeahead" autocomplete="off"
                                                        value="<?php echo $locationtypes; ?>"/>
+
                                                 <span class="help-block grey small">Space separated values.</span>
 
+                                                <div class="container ">
+                                                    <!-- <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                                                    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                                                    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li> -->
+                                                    <ul class="nav nav-pills">
+                                                    <div class="btn-group" style="overflow-x: scroll; width: 100%;">
+                                                    <button type="button" class="btn btn-default active" data-toggle="tab" href="#mon">Mon</button>
+                                                    <button type="button" class="btn btn-default active" data-toggle="tab" href="#tue">Tue</button>
+                                                    <button type="button" class="btn btn-default active" data-toggle="tab" href="#wed">Wed</button>
+                                                    <button type="button" class="btn btn-default active" data-toggle="tab" href="#thu">Thu</button>
+                                                    <button type="button" class="btn btn-default active" data-toggle="tab" href="#fri">Fri</button>
+                                                    <button type="button" class="btn btn-default active" data-toggle="tab" href="#sat">Sat</button>
+                                                    <button type="button" class="btn btn-default active" data-toggle="tab" href="#sun">Sun</button>
+                                                    </div>
+                                                  </ul>
+                                                  <?php function time_pop($con,$day,$id){
+                                                    $sql2 = "SELECT `hour`, `popularity` FROM time_popularity  WHERE `id` = '" . $id ."' AND `day` = '". $day ."' ORDER BY `hour`;";
+                                                    $hour = "";
+                                                    $popularity = "";
+                                                    $r_query2 = mysqli_query($con, $sql2);
+                                                    while ($row = mysqli_fetch_array($r_query2)) {
+                                                        $popularity = $row['popularity'];
+                                                        $hour = $row['hour'];
+                                                        $labeled = "{$day}{$hour}";
+                                                        echo  '<label for="' . $labeled . '">' . $hour . ':00H</label>';
+                                                        echo '<input id="'.$labeled.'" name="'.$labeled.'" class="form-control text-center" type="text" value="'.$popularity.'"/>';
+                                                  } }?>
+                                                  <div class="tab-content">
+                                                    <div id="mon" class="tab-pane fade in active show">
+                                                      <h3>Monday</h3>
+                                                      <?php time_pop($con,1,$id);?>
+                                                    </div>
+                                                    <div id="tue" class="tab-pane fade">
+                                                      <h3>Tuesday</h3>
+                                                      <?php time_pop($con,2,$id);?>
+                                                    </div>
+                                                    <div id="wed" class="tab-pane fade">
+                                                      <h3>Wednesday</h3>
+                                                      <?php time_pop($con,3,$id);?>
+                                                    </div>
+                                                    <div id="thu" class="tab-pane fade">
+                                                      <h3>Thusday</h3>
+                                                      <?php time_pop($con,4,$id);?>
+                                                    </div>
+                                                    <div id="fri" class="tab-pane fade">
+                                                      <h3>Friday</h3>
+                                                      <?php time_pop($con,5,$id);?>
+                                                    </div>
+                                                    <div id="sat" class="tab-pane fade">
+                                                      <h3>Saturday</h3>
+                                                      <?php time_pop($con,6,$id);?>
+                                                    </div>
+                                                    <div id="sun" class="tab-pane fade">
+                                                      <h3>Sunday</h3>
+                                                      <?php time_pop($con,7,$id);?>
+                                                    </div>
+                                                  </div>
+
+                                                  <script>
+                                                    $(document).ready(function(){
+                                                        $(".nav-pills button").click(function(){
+                                                          if($(this).hasClass('active')){
+                                                              $(this).removeClass('active')
+                                                          } else {
+                                                              $(this).addClass('active')
+                                                              $(this).tab('show');
+                                                          }
+
+                                                        });
+                                                    });
+                                                    </script>
+                                                </div>
                                             </div>
                                             <div class="btn-group btn-group-lg">
                                                 <button type="submit" class="btn btn-default">Submit Edits</button>
+                                                <script>
+                                                function readform(){
+                                                  /*var kvpairs = [];
+                                                  var form = document.getElementById("allform")// get the form somehow
+                                                  for ( var i = 0; i < form.elements.length; i++ ) {
+                                                    if(form.elements[i].tagName == 'INPUT' || form.elements[i].tagName == 'TEXTAREA'){
+                                                     var e = form.elements[i];
+                                                     kvpairs.push(encodeURIComponent(e.id) + ":" + encodeURIComponent(e.value));
+                                                   }
+                                                  }
+                                                  var queryString = kvpairs.join(",");
+                                                  alert(queryString);
+
+                                                  var datastring = queryString.serialize();
+                                                  alert(datastring);*/
+                                                  var dataString = $("#allform").serialize();
+                                                  alert(dataString);
+                                                  $.ajax({
+                                                    type: "POST",
+                                                    url: "dataBE.php",
+                                                    data: dataString, //Send in password inputs as data, as well as email(GENERATED AT THE TOP OF THE PAGE'S PHP)
+                                                    dataType: "text",
+                                                    beforeSend: function() {
+                                                        //alert($(queryString).serialize());
+                                                    },
+                                                    success: function(xhr, textStatus, err) { //function called if your request succeeds
+                                                        //console.log(response);
+                                                        //alert(response + "1");\\
+                                                        alert("Good responseText: "+ xhr.responseText);
+                                                        //alert("Good status: " + xhr.status);
+                                                        //alert("Good text status: " + textStatus);
+                                                        //alert("error: " + err);
+                                                        //alert("Success!")
+                                                    },
+                                                    //error: function(response) { //function called if your request failed
+                                                    error: function(xhr, textStatus, err) {
+                                                      alert("Bad responseText: "+ xhr.responseText);
+                                                      alert("Bad status: " + xhr.status);
+                                                      alert("Bad text status: " + textStatus);
+                                                      alert("error: " + err);
+                                                      alert(data);
+                                                    }
+                                                });
+                                                return false;
+                                                };
+                                                </script>
+                                                </form>
                                                 <input type="button" class="btn btn-default" value="Clear"
                                                        onClick="window.location.href=window.location.href">
                                             </div>
                                         <!-- https://canvasjs.com/javascript-charts/interactive-draggable-chart/
                                         SELECT `hour`, `popularity` FROM time_popularity  WHERE `id` = "ChIJ936qCdk82jERSfwzW4_7V7A" AND `day` = '1' ORDER BY `hour`;
                                         -->
-                                        </form>
+
                                         <?php
                                         } else {}
                                         }

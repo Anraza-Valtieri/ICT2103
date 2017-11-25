@@ -8,15 +8,15 @@ $mysqli = new mysqli("47.74.176.6", "root", "foobar123!", "GodsEye");
  */
 
 $mysqli = new mysqli("47.74.176.6", "root", "foobar123!", "GodsEye");
-$sql = "SELECT location.name FROM location
-			WHERE location.name LIKE '%".$_GET['query']."%'
+$sql = "SELECT location_type FROM location_type
+			WHERE location_type.location_type LIKE '".$_GET['ltype']."%'
 			LIMIT 7";
 $result = $mysqli->query($sql);
 
 $json = [];
 while($row = $result->fetch_assoc()){
     //$json[] = $row['id'];
-    $json[] = $row['name'];
+    $json[] = $row['location_type'];
 }
 echo json_encode($json);
 ?>
